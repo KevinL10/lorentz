@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    height:100%;
+}
+
+.toolbar {
+    position: relative;
+    margin-top: -8%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tool-icon {
+    display: flex;
+    margin: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 10%;
+    padding: 10px;
+    border: solid black;
+    align-items:center;
+    justify-content:center;
+
+}
+
+/* 
+.tool-icon:hover {
+    background-color: yellow;
+} */
+
+.selected {
+    background-color: yellow;
+}
