@@ -41,6 +41,20 @@ function setUpToolbar(){
             selectedTool.classList.remove('selected');
             currentTool.classList.add('selected');
             selectedTool = currentTool;
+
+            if(e == 'drag-tool'){
+                console.log(fabric.Line)
+                console.log(fabric.Line.prototype)
+                fabric.Line.prototype.hasBorders = true;
+                fabric.Line.prototype.hasControls = true;
+                fabric.Line.prototype.lockMovementX = false;
+                fabric.Line.prototype.lockMovementY = false;
+            } else {
+                fabric.Line.prototype.hasBorders = false;
+                fabric.Line.prototype.hasControls =  false;
+                fabric.Line.prototype.lockMovementX = true;
+                fabric.Line.prototype.lockMovementY = true;
+            }
         })
     });
     selectedTool = document.getElementById(tools[0]);
@@ -48,7 +62,6 @@ function setUpToolbar(){
 }
 
 setUpToolbar();
-
 
 
 
