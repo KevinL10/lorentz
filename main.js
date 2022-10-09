@@ -12,8 +12,7 @@ resize();
 let events = []
 let lines = []
 let canvas = new fabric.Canvas('canvas', {
-    selection:false,
-    hasControls: false
+    selection:false
 });
 let lineStart = null;
 
@@ -31,39 +30,20 @@ function drawAxis(){
 
 drawAxis();
 
-let selectedTool = null;
-const tools = ['drag-tool', 'line-tool', 'event-tool', 'boost-tool']
-
-function setUpToolbar(){
-    tools.forEach((e) => {
-        let currentTool = document.getElementById(e);
-        currentTool.addEventListener('click', () => {
-            selectedTool.classList.remove('selected');
-            currentTool.classList.add('selected');
-            selectedTool = currentTool;
-
-            if(e == 'drag-tool'){
-                console.log(fabric.Line)
-                console.log(fabric.Line.prototype)
-                fabric.Line.prototype.hasBorders = true;
-                fabric.Line.prototype.hasControls = true;
-                fabric.Line.prototype.lockMovementX = false;
-                fabric.Line.prototype.lockMovementY = false;
-            } else {
-                fabric.Line.prototype.hasBorders = false;
-                fabric.Line.prototype.hasControls =  false;
-                fabric.Line.prototype.lockMovementX = true;
-                fabric.Line.prototype.lockMovementY = true;
-            }
-        })
-    });
-    selectedTool = document.getElementById(tools[0]);
-    selectedTool.classList.add('selected');
+function unlockMove(){
+    fabric.Object.prototype.hasBorders = true;
+    fabric.Object.prototype.hasControls = true;
+    fabric.Object.prototype.lockMovementX = false;
+    fabric.Object.prototype.lockMovementY = false;
 }
 
-setUpToolbar();
 
-
+function lockMove(){
+    fabric.Object.prototype.hasBorders = false;
+    fabric.Object.prototype.hasControls = false;
+    fabric.Object.prototype.lockMovementX = true;
+    fabric.Object.prototype.lockMovementY = true;
+}
 
 function onMouseDown(e){
     let pointer = this.getPointer(e);
@@ -80,11 +60,7 @@ function onMouseDown(e){
         });
         this.add(circle);
         events.push(circle);
-        console.log();
-    } else if(selectedTool.id === 'boost-tool'){
-
     }
-
 }
 
 function onMouseUp(e){
@@ -148,3 +124,43 @@ function boost(v){
     });
     canvas.renderAll();
 }
+
+
+let selectedTool = null;
+const drawTools = ['drag-tool', 'line-tool', 'event-tool']
+
+function setUpToolbar(){
+
+    drawTools.forEach((e) => {
+        let currentTool = document.getElementById(e);
+        currentTool.addEventListener('click', () => {
+            selectedTool.classList.remove('selected');
+            currentTool.classList.add('selected');
+            selectedTool = currentTool;
+
+            if(e === 'drag-tool'){
+                unlockMove();
+            } else {
+                lockMove();
+            }
+
+            if(e === 'boost-tool'){
+
+            }
+        })
+    });
+
+    let boostTool = document.getElementById('boost-tool');
+    boostTool.addEventListener('click', () => {
+        let velocity = c * parseFloat(window.prompt("Boost to velocity (multiple of c): "));
+        boost(velocity);
+    });
+
+    selectedTool = document.getElementById('drag-tool');
+    selectedTool.classList.add('selected');
+}
+
+setUpToolbar();
+
+
+
