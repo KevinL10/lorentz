@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <title>Document</title>
-</head>
-<body>
-    <canvas id="canvas"></canvas>
-    <div class="toolbar">
+  </head>
+  <body>
+    <div id="canvas-wrap">
+      <canvas id="canvas"></canvas>
+      <div id="toolbar">
         <div id="drag-tool" class="tool-icon">drag</div>
         <div id="line-tool" class="tool-icon">line</div>
-        <div id="event-tool" class="tool-icon">event</div>    
+        <div id="event-tool" class="tool-icon">event</div>
         <div id="boost-tool" class="tool-icon">boost</div>
+      </div>
     </div>
     <script src="main.js"></script>
-</body>
-
+  </body>
 </html>
